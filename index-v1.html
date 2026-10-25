@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MELUHHA — Ritual, Reborn.</title>
+<meta name="description" content="MELUHHA — a house of ritual body oils. Ancient in memory. Contemporary in hand.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Marcellus&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+<!-- Reusable seal mark (placeholder vector — replace with client master logo SVG) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="seal" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M60 18v70" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M60 14l2.4 5.6 5.6 2.4-5.6 2.4L60 30l-2.4-5.6L52 22l5.6-2.4z" fill="currentColor"/>
+    <path d="M44 40v24c0 9 7 14 16 14s16-5 16-14V40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M32 46v20c0 15 12 24 28 24s28-9 28-24V46" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M30 96c5-4 10-4 15 0s10 4 15 0 10-4 15 0 10 4 15 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M38 103c4-3 8-3 11 0s8 3 11 0 8-3 11 0 8 3 11 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ============ LOADER ============ -->
+<div id="loader" aria-hidden="true">
+  <svg class="loader-seal"><use href="#seal"/></svg>
+  <div class="loader-year"><span id="loaderYear">2600</span><em id="loaderEra">BCE</em></div>
+  <p class="loader-line">Before borders had names</p>
+</div>
+
+<!-- ============ CHROME ============ -->
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span></span></div>
+
+<header class="nav">
+  <a href="#top" class="nav-mark" aria-label="MELUHHA home"><svg><use href="#seal"/></svg><span>MELUHHA</span></a>
+  <nav class="nav-chapters" aria-label="Chapters">
+    <a href="#ch-water" data-ch="I">The Water</a>
+    <a href="#ch-cities" data-ch="II">The Cities</a>
+    <a href="#ch-return" data-ch="III">The Return</a>
+    <a href="#ch-vessel" data-ch="IV">The Vessel</a>
+    <a href="#ch-ritual" data-ch="V">The Ritual</a>
+    <a href="#ch-collection" data-ch="VI">Collection</a>
+  </nav>
+  <div class="nav-tools">
+    <button class="btn-notes" id="toggleNotes" aria-pressed="false">Build notes</button>
+    <button class="btn-sound" aria-label="Sound (placeholder)"><i></i><i></i><i></i><i></i></button>
+  </div>
+  <div class="progress"><span id="progressBar"></span></div>
+</header>
+
+<main id="top">
+
+<!-- ============ 00 · HERO ============ -->
+<section class="hero" id="hero" data-theme="dark">
+  <canvas id="waterGL" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="kicker">A house of ritual · Est. 2026</p>
+    <h1 class="hero-title" aria-label="MELUHHA">
+      <span>M</span><span>E</span><span>L</span><span>U</span><span>H</span><span>H</span><span>A</span>
+    </h1>
+    <p class="hero-sub">Ritual, Reborn.</p>
+  </div>
+  <p class="hero-quote split">Before borders had names, the water already knew the way.</p>
+  <div class="scroll-cue"><span>Scroll to begin the passage</span><i></i></div>
+  <aside class="pnote">HERO · Real-time WebGL water (GLSL caustics) reacting to cursor. Final: Indus-green water + gold light, ambient score fades in on first interaction.</aside>
+</section>
+
+<!-- ============ I · THE NAME THAT CROSSED THE WATER ============ -->
+<section class="voyage" id="ch-water" data-theme="dark">
+  <div class="voyage-sticky">
+    <div class="chapter-tag"><b>I</b> The Return</div>
+    <svg class="map" viewBox="0 0 1000 600" aria-hidden="true">
+      <defs>
+        <linearGradient id="seaGrad" x1="0" x2="1"><stop offset="0" stop-color="#0b241b"/><stop offset="1" stop-color="#123a2b"/></linearGradient>
+      </defs>
+      <!-- stylised coastline (illustrative) -->
+      <path class="coast" d="M40 110 C120 120 170 170 210 190 C250 205 290 230 330 260 C360 285 380 300 420 320 C470 345 520 360 560 390 C600 420 650 460 700 470 C740 478 780 450 820 420 C850 398 880 360 910 330 C935 305 955 270 975 240"/>
+      <path class="coast thin" d="M330 260 C350 300 360 340 390 380 C420 420 470 450 520 470"/>
+      <path class="coast thin" d="M820 420 C830 470 850 520 870 580"/>
+      <!-- trade route -->
+      <path id="route" class="route" d="M880 380 C820 430 740 470 640 460 C560 450 480 420 430 360 C390 310 330 260 250 205 C210 178 160 150 110 130"/>
+      <g class="ports">
+        <g class="port" data-at="0"><circle cx="880" cy="380" r="5"/><text x="895" y="372">Meluhha</text><text class="sub" x="895" y="392">Indus region · as many scholars hold</text></g>
+        <g class="port" data-at=".38"><circle cx="560" cy="452" r="4"/><text x="560" y="490" text-anchor="middle">Magan</text></g>
+        <g class="port" data-at=".66"><circle cx="330" cy="262" r="4"/><text x="300" y="300" text-anchor="middle">Dilmun</text></g>
+        <g class="port" data-at="1"><circle cx="110" cy="130" r="5"/><text x="110" y="105" text-anchor="middle">Akkad · Ur</text></g>
+      </g>
+      <circle id="vessel" r="7" class="vessel-dot"/>
+    </svg>
+    <div class="voyage-copy">
+      <p class="v-line" data-step="0">Ships left one shore carrying stone, timber, metal, fibre and the work of human hands.</p>
+      <p class="v-line" data-step="1">They reached another carrying evidence that distance could be crossed.</p>
+      <p class="v-line" data-step="2">c. 2300 BCE — Mesopotamian kings boast of ships from a far land, moored at their quays.</p>
+      <p class="v-line big" data-step="3">On clay, a name survived:<br><em>Meluhha.</em></p>
+    </div>
+    <div class="tablet" aria-hidden="true"><span>MELUHHA</span></div>
+  </div>
+  <aside class="pnote">CH. I · Pinned scroll-scrub. Route draws itself, vessel sails Meluhha → Magan → Dilmun → Akkad. Final: hand-illustrated map in sandstone ink + 3D clay tablet (Blender, baked) that rotates into view.</aside>
+</section>
+
+<!-- ============ II · THE CITIES ============ -->
+<section class="cities" id="ch-cities" data-theme="light">
+  <div class="cities-sticky">
+    <div class="chapter-tag dark"><b>II</b> The Cities</div>
+    <div class="cities-frame">
+      <img src="assets/img/city-aerial.jpg" class="c-img c-img-1" alt="An illustrated Indus city beside a wide river">
+      <img src="assets/img/great-bath.jpg" class="c-img c-img-2" alt="An illustrated great bath with bathers on stone steps">
+      <img src="assets/img/water-channel.jpg" class="c-img c-img-3" alt="A contemporary stone water channel lit gold">
+    </div>
+    <div class="cities-copy">
+      <p class="c-line" data-step="0"><span class="eyebrow">Order · Craft · Water · Cultivation · Civic life</span>A civilisation remembered for what it built — and for how it cared for the body.</p>
+      <p class="c-line" data-step="1">There was a time when care was not separated from life. Water prepared the body. Oil protected it. Fragrance marked the threshold between one state and the next.</p>
+      <p class="c-line silence" data-step="2">The cities fell silent. The river changed its course. The Indus script still refuses to surrender its voice.</p>
+    </div>
+  </div>
+  <aside class="pnote">CH. II · Full-bleed zoom-through: city → Great Bath → present-day water channel (the same water, 4,000 years apart). Final: 2.5D parallax — illustrations separated into depth layers + AI-assisted cinematic camera move (8–10s, 4K, rendered to scroll-scrubbed video).</aside>
+</section>
+
+<!-- ============ III · THE RETURN ============ -->
+<section class="return" id="ch-return" data-theme="dark">
+  <div class="return-sticky">
+    <div class="year-scrub"><span id="yearNum">2600</span><em id="yearEra">BCE</em></div>
+    <p class="r-intro">Four thousand years later, the name returns.</p>
+    <ul class="r-nots">
+      <li>Not as a kingdom restored.</li>
+      <li>Not as a secret decoded.</li>
+      <li>Not as a borrowed past dressed for the present.</li>
+    </ul>
+    <p class="r-answer">As a house of fragrance.</p>
+    <svg class="r-seal"><use href="#seal"/></svg>
+  </div>
+  <aside class="pnote">CH. III · Time-scrub counter 2600 BCE → 2026 CE. Each "Not as…" is struck through as you scroll; the seal draws itself on the final line. Final: gold seal rendered as real-time 3D emboss.</aside>
+</section>
+
+<!-- ============ PROLOGUE ============ -->
+<section class="prologue" id="ch-prologue" data-theme="light">
+  <div class="pro-grid">
+    <figure class="pro-media mask-reveal"><img src="assets/img/woman-bath.jpg" alt="A woman in a white towel applying oil beside a stone bath"></figure>
+    <div class="pro-copy">
+      <p class="eyebrow">Prologue</p>
+      <h2 class="split">The body remembers.</h2>
+      <p class="lede">Some things survive because they were protected. Others survive because the body refused to forget.</p>
+      <p>MELUHHA does not claim to recover a lost formula. It carries forward a more enduring intelligence: that care becomes meaningful when it is given form, rhythm and attention.</p>
+      <p class="stat-row"><span><b>5</b> body oils</span><span><b>5</b> thresholds</span><span><b>1</b> ritual system</span></p>
+      <p class="signoff">Not nostalgia. A return.</p>
+    </div>
+  </div>
+  <aside class="pnote">PROLOGUE · Mask reveal on image + line-by-line type. Final: replace still with 6s slow-motion film loop (oil warming in palms), muted autoplay.</aside>
+</section>
+
+<!-- ============ THE HOUSE ============ -->
+<section class="house" id="ch-house" data-theme="light">
+  <p class="eyebrow center">The House</p>
+  <h2 class="house-title split">Ancient in memory.<br><em>Contemporary in hand.</em></h2>
+  <div class="house-cols">
+    <p>We believe daily care deserves the gravity of ceremony and the ease of instinct.</p>
+    <p>Every object must be useful. Every word must be true. Every ritual must leave the person more present than it found them.</p>
+  </div>
+  <div class="northstar">
+    <span>North Star</span>
+    <p>Only what is meaningful and masterfully made may bear the seal.</p>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+    <span>The past is not staged</span><svg><use href="#seal"/></svg><span>Its intelligence is carried forward</span><svg><use href="#seal"/></svg>
+    <span>The past is not staged</span><svg><use href="#seal"/></svg><span>Its intelligence is carried forward</span><svg><use href="#seal"/></svg>
+  </div></div>
+</section>
+
+<!-- ============ IV · THE VESSEL (3D stela + five thresholds) ============ -->
+<section class="vessel" id="ch-vessel" data-theme="dark">
+  <div class="vessel-sticky">
+    <canvas id="bottleGL" aria-label="Interactive 3D model of the Stela bottle"></canvas>
+
+    <div class="chapter-tag"><b>IV</b> The Object</div>
+
+    <!-- Phase A: The Stela -->
+    <div class="stela-intro">
+      <h2>The Stela</h2>
+      <p>The vessel has weight. The memory has none. Both remain.</p>
+    </div>
+    <div class="callouts">
+      <div class="callout" data-c="0" style="--x:62%;--y:30%"><i></i><b>Low mineral cap</b><span>An original interlocking passage motif — water, movement, order.</span></div>
+      <div class="callout left" data-c="1" style="--x:18%;--y:34%"><i></i><b>Mass outside</b><span>Heavy glass gives the instinct weight.</span></div>
+      <div class="callout" data-c="2" style="--x:64%;--y:56%"><i></i><b>A softened void within</b><span>The inner vial hangs from the neck, held in a continuous field of air.</span></div>
+      <div class="callout left" data-c="3" style="--x:18%;--y:52%"><i></i><b>Moulded seal</b><span>Authority, without armour. It cannot peel away.</span></div>
+    </div>
+    <div class="palette">
+      <span style="--c:#d9c6a5">Sandstone</span><span style="--c:#d79a8e">Dusty rose</span><span style="--c:#b9c9ae">Celadon</span><span style="--c:#b4664a">Terracotta</span><span style="--c:#8c8494">Smoked lilac</span>
+    </div>
+
+    <!-- Phase B: Five thresholds -->
+    <div class="thresholds-head"><p class="eyebrow">The System</p><h2>Five thresholds. One vessel.</h2><p>A different way of returning each time.</p></div>
+    <div class="thresholds">
+      <article class="th" data-i="0">
+        <p class="th-num">01 · First threshold</p><h3>ME</h3><h4>The Earth Remembers</h4><p class="th-line">Presence, held close.</p>
+        <dl><dt>Moment</dt><dd>Morning grounding</dd><dt>Texture</dt><dd>Rich satin</dd><dt>Botanicals</dt><dd>Saffron · Cardamom · Vetiver</dd></dl>
+      </article>
+      <article class="th" data-i="1">
+        <p class="th-num">02 · Second threshold</p><h3>LI</h3><h4>The Hour Remains</h4><p class="th-line">Memory, without sentiment.</p>
+        <dl><dt>Moment</dt><dd>Evening unwind</dd><dt>Texture</dt><dd>Velvet satin</dd><dt>Botanicals</dt><dd>Rose · Jasmine · Benzoin</dd></dl>
+      </article>
+      <article class="th" data-i="2">
+        <p class="th-num">03 · Third threshold</p><h3>ḪA</h3><h4>The Water Transforms</h4><p class="th-line">Renewal, made lucid.</p>
+        <dl><dt>Moment</dt><dd>Post-bath</dd><dt>Texture</dt><dd>Light satin</dd><dt>Botanicals</dt><dd>Lotus · Green fig · Bitter citrus</dd></dl>
+      </article>
+      <article class="th" data-i="3">
+        <p class="th-num">04 · Fourth threshold</p><h3>KI</h3><h4>The Air Connects</h4><p class="th-line">Belonging, with room to breathe.</p>
+        <dl><dt>Moment</dt><dd>Massage &amp; reset</dd><dt>Texture</dt><dd>Dry silk</dd><dt>Botanicals</dt><dd>Cedar · Moss · Frankincense</dd></dl>
+      </article>
+      <article class="th" data-i="4">
+        <p class="th-num">05 · Fifth threshold</p><h3>FINAL RITE</h3><h4>The Unbroken Self</h4><p class="th-line">Integration, after the noise.</p>
+        <dl><dt>Moment</dt><dd>Night treatment</dd><dt>Texture</dt><dd>Cushioned satin</dd><dt>Botanicals</dt><dd>Labdanum · Sandalwood · White flower</dd></dl>
+      </article>
+    </div>
+    <div class="th-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+  <aside class="pnote">CH. IV · One pinned 3D scene (Three.js, physical glass + transmission). Bottle turns as you scroll, callouts anchor to it; then oil tone, cap colour and the world colour shift through the five thresholds. Final: client's CAD/Blender model (GLB, Draco), HDRI studio lighting, carved cap normal map, botanicals floating in depth.</aside>
+</section>
+
+<!-- ============ V · THE RITUAL ============ -->
+<section class="ritual" id="ch-ritual" data-theme="light">
+  <div class="ritual-sticky">
+    <div class="ritual-film">
+      <img src="assets/img/ritual-arm.jpg" class="rf rf-0" alt="">
+      <img src="assets/img/pour.jpg" class="rf rf-1" alt="">
+      <img src="assets/img/me.jpg" class="rf rf-2" alt="">
+      <img src="assets/img/ritual-stroke.jpg" class="rf rf-3" alt="A hand drawing oil along a forearm in a long stroke">
+      <img src="assets/img/robe.jpg" class="rf rf-4" alt="">
+      <span class="film-tag">Film placeholder · 5 chapters</span>
+    </div>
+    <div class="ritual-copy">
+      <p class="eyebrow">V · The Ritual</p>
+      <h2>Care, given a rhythm.</h2>
+      <ol class="steps">
+        <li data-s="0"><b>01</b><span>Prepare</span><p>Bathe, then pat the skin until it remains slightly damp.</p></li>
+        <li data-s="1"><b>02</b><span>Warm</span><p>Pour a small measure into the palm and let body heat loosen the oil.</p></li>
+        <li data-s="2"><b>03</b><span>Press</span><p>Place it where the skin feels dry before beginning to spread.</p></li>
+        <li data-s="3"><b>04</b><span>Draw</span><p>Use long, unhurried strokes until the skin feels supple, not wet.</p></li>
+        <li data-s="4"><b>05</b><span>Pause</span><p>Let the oil settle before dressing or layering fragrance.</p></li>
+      </ol>
+      <p class="ritual-foot">Ritual is care made visible through repetition.</p>
+    </div>
+  </div>
+  <aside class="pnote">CH. V · Scroll-scrubbed ritual film: one continuous 25s shot split into five beats, frame-accurate to scroll (image-sequence on WebGL texture for butter-smooth scrubbing on all devices).</aside>
+</section>
+
+<!-- ============ LAYERING ============ -->
+<section class="layering" id="ch-layering" data-theme="dark">
+  <p class="eyebrow center">Layering · The ritual before the fragrance</p>
+  <h2 class="fill-words"><span>Skin first.</span><span>Scent second.</span><span>Memory after.</span></h2>
+  <div class="layer-flow">
+    <p>Care for the body first, while the skin is still slightly damp.</p>
+    <p>Let the oil settle until the surface feels conditioned, not wet.</p>
+    <p>Apply fragrance to nearby pulse points without rubbing the two rituals together.</p>
+    <p>Choose related or contrasting botanical characters. Let the finished pairing decide.</p>
+  </div>
+</section>
+
+<!-- ============ OBJECTS GALLERY ============ -->
+<section class="objects" id="ch-objects" data-theme="dark">
+  <div class="objects-head"><p class="eyebrow">Objects of the House</p><h2>The seal decides when the story begins.</h2></div>
+  <div class="objects-track">
+    <figure><img src="assets/img/noir-gold.jpg" alt="Amber perfume bottle with a carved stone cap amid gold light and resin"><figcaption>Parfum · Gold dust</figcaption></figure>
+    <figure><img src="assets/img/noir-cap-macro.jpg" alt="Macro of the carved stone cap"><figcaption>The carved cap</figcaption></figure>
+    <figure class="wide"><img src="assets/img/box-waves.jpg" alt="Open presentation box with wave-pattern lid and amber bottle"><figcaption>Coffret · Waves</figcaption></figure>
+    <figure><img src="assets/img/noir-tablet.jpg" alt="Bottle beside a carved stone tablet and vessel"><figcaption>Beside the tablet</figcaption></figure>
+    <figure class="wide"><img src="assets/img/box-steps.jpg" alt="Open presentation box with stepped-pattern lid"><figcaption>Coffret · Steps</figcaption></figure>
+    <figure><img src="assets/img/noir-arch.jpg" alt="Bottle under a sandstone arch with agarwood"><figcaption>Under the arch</figcaption></figure>
+    <figure class="wide"><img src="assets/img/box-lattice.jpg" alt="Open presentation box with lattice-pattern lid"><figcaption>Coffret · Lattice</figcaption></figure>
+    <figure><img src="assets/img/noir-cap.jpg" alt="Carved cap close-up with smoke"><figcaption>Stone, relief, smoke</figcaption></figure>
+  </div>
+  <aside class="pnote">OBJECTS · Horizontal drag/scroll gallery with WebGL image distortion on hover (RGB-split ripple). Final: each object opens a 360° turntable.</aside>
+</section>
+
+<!-- ============ VI · COLLECTION ============ -->
+<section class="collection" id="ch-collection" data-theme="light">
+  <div class="col-head">
+    <p class="eyebrow">VI · Collection</p>
+    <h2>A body-oil ritual for every threshold.</h2>
+    <p>Choose by skin need, texture and the moment of care.</p>
+  </div>
+  <div class="col-list">
+    <a class="col-row" href="#" data-img="assets/img/me.jpg" style="--t:#b5651d"><span class="code">ME</span><span>Dry-feeling skin</span><span>Rich satin</span><span>Morning grounding</span><span class="go">Discover →</span></a>
+    <a class="col-row" href="#" data-img="assets/img/li.jpg" style="--t:#d79a8e"><span class="code">LI</span><span>Softness &amp; suppleness</span><span>Velvet satin</span><span>Evening unwind</span><span class="go">Discover →</span></a>
+    <a class="col-row" href="#" data-img="assets/img/ha.jpg" style="--t:#a9bb9c"><span class="code">ḪA</span><span>Moisture after water</span><span>Light satin</span><span>Post-bath</span><span class="go">Discover →</span></a>
+    <a class="col-row" href="#" data-img="assets/img/ki.jpg" style="--t:#9aa33a"><span class="code">KI</span><span>Daily conditioning</span><span>Dry silk</span><span>Massage &amp; reset</span><span class="go">Discover →</span></a>
+    <a class="col-row" href="#" data-img="assets/img/final.jpg" style="--t:#6b3a24"><span class="code">FINAL</span><span>Very dry areas</span><span>Cushioned satin</span><span>Night treatment</span><span class="go">Discover →</span></a>
+  </div>
+  <div class="col-hover" aria-hidden="true"><img alt=""></div>
+  <div class="care-truth">
+    <div><p class="eyebrow">Care truth</p><h3>Why the ritual works</h3><p>Oil does not add water to the skin. Used after bathing, an emollient body oil helps soften the surface and reduce the escape of existing moisture. That is why timing matters as much as quantity.</p><p class="tri">Soften · Seal · Comfort</p></div>
+    <figure><img src="assets/img/spa-range.jpg" alt="The MELUHHA range on stone steps in a sunlit bath"></figure>
+  </div>
+  <aside class="pnote">COLLECTION · Hover a row: product floats beside the cursor. Final: product pages with 3D viewer, ritual video, ingredient story, Shopify headless checkout.</aside>
+</section>
+
+<!-- ============ FINALE ============ -->
+<section class="finale" id="ch-finale" data-theme="dark">
+  <div class="finale-sticky">
+    <div class="wax"><svg><use href="#seal"/></svg></div>
+    <p class="finale-pre">Some things are not invented. They are rediscovered.</p>
+    <h2 class="finale-title">MELUHHA belongs to <em>you…</em></h2>
+    <form class="join" onsubmit="event.preventDefault();this.classList.add('sent')">
+      <label for="email">Enter the house — first access to the Founders' Edition</label>
+      <div><input id="email" type="email" placeholder="Your email" required><button>Join</button></div>
+      <p class="thanks">Welcome to the house.</p>
+    </form>
+  </div>
+  <aside class="pnote">FINALE · Wax seal presses down on scroll (scale + shadow + paper deform). Final: real-time 3D wax with subsurface lighting, haptic-like "thud" sound cue.</aside>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-mark"><svg><use href="#seal"/></svg><span>MELUHHA</span><em>Ritual, Reborn.</em></div>
+  <nav><a href="#ch-water">The Story</a><a href="#ch-vessel">The Stela</a><a href="#ch-ritual">The Ritual</a><a href="#ch-collection">Shop</a><a href="#">Journal</a><a href="#">Contact</a></nav>
+  <p class="foot-legal">The story may be mysterious; the promise must remain exact. · © 2026 MELUHHA · Structure prototype v0.1</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script src="js/water.js"></script>
+<script src="js/main.js"></script>
+<script type="module" src="js/bottle.js"></script>
+</body>
+</html>
